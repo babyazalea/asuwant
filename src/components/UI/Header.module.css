@@ -1,4 +1,5 @@
 .header {
+  box-sizing: border-box;
   border: 0.1rem solid pink;
   width: 100%;
   height: 5rem;

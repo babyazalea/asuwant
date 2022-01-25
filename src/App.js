@@ -1,6 +1,8 @@
 import { Component } from "react";
 import Layout from "./components/UI/Layout";
 
+import "./App.css";
+
 class App extends Component {
   render() {
     return (
