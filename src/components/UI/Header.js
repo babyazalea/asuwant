@@ -8,8 +8,8 @@ class Header extends Component {
       <header className={styles.header}>
         <nav className={styles.nav}>
           <div className="logo">PIONEER</div>
-          <div className="slider">
-            <input type="range" />
+          <div className="options">
+            <span>...options</span>
           </div>
         </nav>
       </header>
