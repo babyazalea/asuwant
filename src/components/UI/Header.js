@@ -1,10 +1,12 @@
 import { Component } from "react";
 
+import styles from "./Header.module.css";
+
 class Header extends Component {
   render() {
     return (
-      <header>
-        <nav>
+      <header className={styles.header}>
+        <nav className={styles.nav}>
           <div className="logo">PIONEER</div>
           <div className="slider">
             <input type="range" />
