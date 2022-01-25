@@ -1,4 +1,5 @@
 import { Component, Fragment } from "react";
+
 import Header from "./Header";
 import Main from "./Main";
 
@@ -9,9 +10,7 @@ class Layout extends Component {
     return (
       <Fragment>
         <Header />
-        <Main>
-          <h1>this is main</h1>
-        </Main>
+        <Main isNews={this.props.news}>{this.props.children}</Main>
       </Fragment>
     );
   }
