@@ -1,9 +1,9 @@
 .main {
   box-sizing: border-box;
   width: 60%;
-  height: 70%;
   margin-top: 4rem;
   display: flex;
   align-items: center;
   justify-content: center;
+  font-family: "Gowun Batang", serif;
 }

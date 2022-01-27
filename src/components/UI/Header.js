@@ -7,7 +7,7 @@ class Header extends Component {
     return (
       <header className={styles.header}>
         <nav className={styles.nav}>
-          <div className="logo">PIONEER</div>
+          <div className="logo">asuwant</div>
           <div className="options">
             <span>...options</span>
           </div>

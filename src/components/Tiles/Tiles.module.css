@@ -1,11 +1,10 @@
 .tiles {
   border: 0.1rem solid green;
+  padding: 1rem;
   width: 100%;
-  height: 100%;
-  flex: 1 1 auto;
-  gap: 3rem;
+  box-sizing: border-box;
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(3, 1fr);
 }
-
-/* .tiles > div:not(:last-child) {
-  margin-right: 1rem;
-} */
