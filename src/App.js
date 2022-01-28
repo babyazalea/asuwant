@@ -357,9 +357,9 @@ class App extends Component {
     };
   }
 
-  completeLoading() {
-    this.setState({
-      isLoading: false,
+  loadingComplete() {
+    this.setState((prevState) => {
+      return { ...prevState, isLoading: false };
     });
   }
 
@@ -375,14 +375,7 @@ class App extends Component {
     //   .catch((err) => {
     //     console.log(err);
     //   });
-    // const loadingComplete = () =>
-    //   this.setState((prevState) => {
-    //     return {
-    //       ...prevState,
-    //       isLoading: false,
-    //     };
-    //   });
-    // setTimeout(loadingComplete, 2000);
+    // setTimeout(this.loadingComplete, 2000);
   }
 
   render() {
