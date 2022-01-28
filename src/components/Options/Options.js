@@ -19,7 +19,10 @@ class Options extends Component {
       <div className={styles.options}>
         <div className={styles["country-buttons"]}>
           {countriesData.countries.map((country) => (
-            <button key={country.name}>
+            <button
+              key={country.name}
+              onClick={() => this.props.selectCountry(country.name)}
+            >
               <span>{country["kor-name"]}</span>
               <span>{this.getFlagEmoji(country.code)}</span>
             </button>
@@ -27,7 +30,12 @@ class Options extends Component {
         </div>
         <div className={styles["category-buttons"]}>
           {categoriesData.categories.map((category) => (
-            <button key={category.name}>{category["kor-name"]}</button>
+            <button
+              key={category.name}
+              onClick={() => this.props.selectCategory(category.name)}
+            >
+              {category["kor-name"]}
+            </button>
           ))}
         </div>
       </div>
