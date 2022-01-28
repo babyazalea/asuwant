@@ -1,6 +1,7 @@
 .main {
   box-sizing: border-box;
   width: 60%;
+  height: 75%;
   margin-top: 4rem;
   display: flex;
   align-items: center;
@@ -8,6 +9,6 @@
   font-family: "Gowun Batang", serif;
 }
 
-.loading {
-  height: 75%;
+.news {
+  height: fit-content;
 }

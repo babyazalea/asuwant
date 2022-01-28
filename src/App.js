@@ -1,4 +1,4 @@
-import { Component } from "react";
+import { Component, Fragment } from "react";
 // import axios from "axios";
 
 import Layout from "./components/UI/Layout";
@@ -6,12 +6,14 @@ import Loading from "./components/UI/Loading";
 import Tiles from "./components/Tiles/Tiles";
 
 import "./App.css";
+import Options from "./components/Options/Options";
 
 class App extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      choiceIsOver: false,
       isLoading: true,
       articles: [
         {
@@ -373,26 +375,30 @@ class App extends Component {
     //   .catch((err) => {
     //     console.log(err);
     //   });
-
-    const loadingComplete = () =>
-      this.setState((prevState) => {
-        return {
-          ...prevState,
-          isLoading: false,
-        };
-      });
-
-    setTimeout(loadingComplete, 2000);
+    // const loadingComplete = () =>
+    //   this.setState((prevState) => {
+    //     return {
+    //       ...prevState,
+    //       isLoading: false,
+    //     };
+    //   });
+    // setTimeout(loadingComplete, 2000);
   }
 
   render() {
     return (
       <div className="App">
         <Layout isLoading={this.state.isLoading}>
-          {this.state.isLoading ? (
-            <Loading />
+          {this.choiceIsOver ? (
+            <Fragment>
+              {this.state.isLoading ? (
+                <Loading />
+              ) : (
+                <Tiles articles={this.state.articles} />
+              )}
+            </Fragment>
           ) : (
-            <Tiles articles={this.state.articles} />
+            <Options />
           )}
         </Layout>
       </div>

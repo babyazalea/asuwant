@@ -7,9 +7,7 @@ class Main extends Component {
     return (
       <main
         className={
-          this.props.isLoading
-            ? `${styles.main} ${styles.loading}`
-            : styles.main
+          this.props.isLoading ? styles.main : `${styles.main} ${styles.news}`
         }
       >
         {this.props.children}
