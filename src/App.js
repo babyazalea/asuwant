@@ -358,19 +358,11 @@ class App extends Component {
     });
   };
 
-  selectCountry = (countryCode) => {
+  confirmedOptions = (countryName, category) => {
     this.setState((prevState) => {
       return {
         ...prevState,
-        chosenCountry: countryCode,
-      };
-    });
-  };
-
-  selectCategory = (category) => {
-    this.setState((prevState) => {
-      return {
-        ...prevState,
+        chosenCountry: countryName,
         chosenCategory: category,
       };
     });
@@ -404,12 +396,7 @@ class App extends Component {
               )}
             </Fragment>
           ) : (
-            <Options
-              chosenCountry={this.state.chosenCountry}
-              chosenCategory={this.state.chosenCategory}
-              selectCountry={this.selectCountry}
-              selectCategory={this.selectCategory}
-            />
+            <Options confirmedOptions={this.confirmedOptions} />
           )}
         </Layout>
       </div>

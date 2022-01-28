@@ -6,6 +6,11 @@ import categoriesData from "../../assets/categoies.json";
 import styles from "./Options.module.css";
 
 class Options extends Component {
+  state = {
+    selectedCountry: null,
+    selectedCategory: null,
+  };
+
   getFlagEmoji(countryCode) {
     const codePoints = countryCode
       .toUpperCase()
@@ -14,29 +19,117 @@ class Options extends Component {
     return String.fromCodePoint(...codePoints);
   }
 
+  selectedCountryHandler = (countryCode) => {
+    this.setState((prevState) => {
+      return {
+        ...prevState,
+        selectedCountry: countryCode,
+      };
+    });
+  };
+
+  selectedCategoryHandler = (category) => {
+    this.setState((prevState) => {
+      return {
+        ...prevState,
+        selectedCategory: category,
+      };
+    });
+  };
+
+  resetCountry = () => {
+    this.setState((prevState) => {
+      return {
+        ...prevState,
+        selectedCountry: null,
+      };
+    });
+  };
+
+  resetCategory = () => {
+    this.setState((prevState) => {
+      return {
+        ...prevState,
+        selectedCategory: null,
+      };
+    });
+  };
+
+  testConfirm = () => {
+    console.log(this.state);
+  };
+
+  countryButtons = (selectedCountryCode) => {
+    if (selectedCountryCode) {
+      const foundCountry = countriesData.countries.find(
+        (country) => country.code === selectedCountryCode
+      );
+
+      return (
+        <button onClick={() => this.resetCountry()}>
+          <span>{this.getFlagEmoji(foundCountry.code)}</span>
+          <span>{foundCountry["kor-name"]}</span>
+        </button>
+      );
+    } else {
+      return countriesData.countries.map((country) => (
+        <button
+          key={country.name}
+          onClick={() => this.selectedCountryHandler(country.code)}
+        >
+          <span>{this.getFlagEmoji(country.code)}</span>
+          <span>{country["kor-name"]}</span>
+        </button>
+      ));
+    }
+  };
+
+  categoryButtons = (selectedCategory) => {
+    if (selectedCategory) {
+      const foundCategory = categoriesData.categories.find(
+        (category) => category.name === selectedCategory
+      );
+
+      return (
+        <button onClick={() => this.resetCategory()}>
+          {foundCategory["kor-name"]}
+        </button>
+      );
+    } else {
+      return categoriesData.categories.map((category) => (
+        <button
+          key={category.name}
+          onClick={() => this.selectedCategoryHandler(category.name)}
+        >
+          {category["kor-name"]}
+        </button>
+      ));
+    }
+  };
+
   render() {
     return (
       <div className={styles.options}>
         <div className={styles["country-buttons"]}>
-          {countriesData.countries.map((country) => (
-            <button
-              key={country.name}
-              onClick={() => this.props.selectCountry(country.name)}
-            >
-              <span>{country["kor-name"]}</span>
-              <span>{this.getFlagEmoji(country.code)}</span>
-            </button>
-          ))}
+          {this.countryButtons(this.state.selectedCountry)}
         </div>
+        <hr className={styles.hr} />
         <div className={styles["category-buttons"]}>
-          {categoriesData.categories.map((category) => (
-            <button
-              key={category.name}
-              onClick={() => this.props.selectCategory(category.name)}
-            >
-              {category["kor-name"]}
-            </button>
-          ))}
+          {this.categoryButtons(this.state.selectedCategory)}
+        </div>
+        <hr className={styles.hr} />
+        <div className={styles["confirm-button"]}>
+          <button
+            disabled={
+              this.state.selectedCountry === null ||
+              this.state.selectedCategory === null
+                ? true
+                : false
+            }
+            onClick={this.testConfirm}
+          >
+            confirm
+          </button>
         </div>
       </div>
     );
