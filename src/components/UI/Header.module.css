@@ -8,7 +8,7 @@
 }
 
 .nav {
-  width: 60%;
+  width: 70%;
   height: 100%;
   display: flex;
   justify-content: space-between;
@@ -18,7 +18,8 @@
 
 .nav-left {
   display: flex;
-  align-items: center;
+  justify-content: center;
+  align-items: baseline;
   gap: 3rem;
   font-family: "Gaegu", cursive;
 }
@@ -28,8 +29,18 @@
   font-weight: 400;
 }
 
+.credits-text-lg {
+  font-size: 1.1rem;
+}
+
+.credits-text-sm {
+  display: none;
+}
+
 .nav-right {
   display: flex;
+  align-items: center;
+  height: 100%;
   gap: 1.5rem;
 }
 
@@ -41,7 +52,16 @@
   box-sizing: border-box;
 }
 
-.redo-button {
+.options-text-sm {
+  display: none;
+  font-size: 0.8rem;
+  align-items: center;
+}
+
+.reset-button {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
   cursor: pointer;
   border: none;
   border-radius: 0.5rem;
@@ -53,10 +73,75 @@
   transition: opacity 0.2s;
 }
 
-.redo-button:hover {
+.reset-button:hover {
   opacity: 1;
 }
 
-.redo-button svg {
-  margin-right: 0.5rem;
+@media (max-width: 1000px) {
+  .nav-right {
+    gap: 1rem;
+  }
+
+  .reset-button {
+    flex-direction: column;
+    justify-content: center;
+    font-size: 0.7rem;
+    padding: 0.5rem;
+  }
+
+  .options {
+    font-size: 0.7rem;
+  }
+
+  .options-text-lg {
+    display: none;
+  }
+
+  .options-text-sm {
+    display: block;
+  }
+}
+
+@media (max-width: 768px) {
+  .nav-left {
+    gap: 1.5rem;
+    align-items: center;
+  }
+
+  .logo {
+    font-size: 1.8rem;
+  }
+
+  .credits-text-lg {
+    display: none;
+  }
+
+  .credits-text-sm {
+    display: flex;
+    align-items: center;
+  }
+
+  .reset-button {
+    width: 2rem;
+    height: 40%;
+  }
+
+  .reset-button-text {
+    display: none;
+  }
+
+  .options {
+    width: 3.5rem;
+    height: 40%;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .options-text-sm {
+    display: flex;
+    flex-direction: column;
+    font-size: 0.8rem;
+  }
 }
