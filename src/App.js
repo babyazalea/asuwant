@@ -10,7 +10,6 @@ import Options from "./components/Options/Options";
 
 class App extends Component {
   state = {
-    choiceIsOver: false,
     chosenCountry: null,
     chosenCategory: null,
     isLoading: true,
@@ -352,20 +351,24 @@ class App extends Component {
     ],
   };
 
+  // loading complete test
   loadingComplete = () => {
     this.setState((prevState) => {
       return { ...prevState, isLoading: false };
     });
   };
 
-  confirmedOptions = (countryName, category) => {
+  confirmedOptions = (country, category) => {
     this.setState((prevState) => {
       return {
         ...prevState,
-        chosenCountry: countryName,
+        chosenCountry: country,
         chosenCategory: category,
       };
     });
+
+    // loading complete test
+    setTimeout(this.loadingComplete, 2000);
   };
 
   componentDidMount() {
@@ -380,14 +383,17 @@ class App extends Component {
     //   .catch((err) => {
     //     console.log(err);
     //   });
-    // setTimeout(this.loadingComplete, 2000);
   }
 
   render() {
     return (
       <div className="App">
-        <Layout isLoading={this.state.isLoading}>
-          {this.choiceIsOver ? (
+        <Layout
+          isLoading={this.state.isLoading}
+          chosenCountry={this.state.chosenCountry}
+          chosenCategory={this.state.chosenCategory}
+        >
+          {this.state.chosenCountry && this.state.chosenCategory ? (
             <Fragment>
               {this.state.isLoading ? (
                 <Loading />

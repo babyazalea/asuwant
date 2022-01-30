@@ -7,7 +7,11 @@ class Layout extends Component {
   render() {
     return (
       <Fragment>
-        <Header />
+        <Header
+          isLoading={this.props.isLoading}
+          chosenCountry={this.props.chosenCountry}
+          chosenCategory={this.props.chosenCategory}
+        />
         <Main isLoading={this.props.isLoading}>{this.props.children}</Main>
       </Fragment>
     );

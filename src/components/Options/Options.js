@@ -55,10 +55,6 @@ class Options extends Component {
     });
   };
 
-  testConfirm = () => {
-    console.log(this.state);
-  };
-
   countryButtons = (selectedCountry) => {
     if (selectedCountry) {
       const foundCountry = countriesData.countries.find(
@@ -126,7 +122,12 @@ class Options extends Component {
                 ? true
                 : false
             }
-            onClick={this.testConfirm}
+            onClick={() =>
+              this.props.confirmedOptions(
+                this.state.selectedCountry,
+                this.state.selectedCategory
+              )
+            }
             className={
               this.state.selectedCountry !== null &&
               this.state.selectedCategory !== null &&
