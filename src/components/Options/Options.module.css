@@ -67,6 +67,11 @@
   padding: 1rem;
 }
 
+.confirm-button .active {
+  background-color: green;
+  color: white;
+}
+
 .confirm-button button:disabled {
   cursor: not-allowed;
   opacity: 0.5;

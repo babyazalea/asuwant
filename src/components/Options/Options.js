@@ -59,10 +59,10 @@ class Options extends Component {
     console.log(this.state);
   };
 
-  countryButtons = (selectedCountryCode) => {
-    if (selectedCountryCode) {
+  countryButtons = (selectedCountry) => {
+    if (selectedCountry) {
       const foundCountry = countriesData.countries.find(
-        (country) => country.code === selectedCountryCode
+        (country) => country.code === selectedCountry.code
       );
 
       return (
@@ -75,7 +75,7 @@ class Options extends Component {
       return countriesData.countries.map((country) => (
         <button
           key={country.name}
-          onClick={() => this.selectedCountryHandler(country.code)}
+          onClick={() => this.selectedCountryHandler(country)}
         >
           <span>{this.getFlagEmoji(country.code)}</span>
           <span>{country["kor-name"]}</span>
@@ -87,7 +87,7 @@ class Options extends Component {
   categoryButtons = (selectedCategory) => {
     if (selectedCategory) {
       const foundCategory = categoriesData.categories.find(
-        (category) => category.name === selectedCategory
+        (category) => category.name === selectedCategory.name
       );
 
       return (
@@ -99,7 +99,7 @@ class Options extends Component {
       return categoriesData.categories.map((category) => (
         <button
           key={category.name}
-          onClick={() => this.selectedCategoryHandler(category.name)}
+          onClick={() => this.selectedCategoryHandler(category)}
         >
           {category["kor-name"]}
         </button>
@@ -127,8 +127,16 @@ class Options extends Component {
                 : false
             }
             onClick={this.testConfirm}
+            className={
+              this.state.selectedCountry !== null &&
+              this.state.selectedCategory !== null &&
+              styles.active
+            }
           >
-            confirm
+            {this.state.selectedCountry === null ||
+            this.state.selectedCategory === null
+              ? "국가와 분류를 선택해주세요"
+              : `${this.state.selectedCountry["kor-name"]}의 ${this.state.selectedCategory["kor-name"]} 뉴스 골라서 보기`}
           </button>
         </div>
       </div>
