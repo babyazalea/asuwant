@@ -11,6 +11,7 @@ class Layout extends Component {
           isLoading={this.props.isLoading}
           chosenCountry={this.props.chosenCountry}
           chosenCategory={this.props.chosenCategory}
+          resetApp={this.props.resetApp}
         />
         <Main isLoading={this.props.isLoading}>{this.props.children}</Main>
       </Fragment>

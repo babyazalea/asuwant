@@ -10,9 +10,9 @@ import Options from "./components/Options/Options";
 
 class App extends Component {
   state = {
+    isLoading: false,
     chosenCountry: null,
     chosenCategory: null,
-    isLoading: true,
     articles: [
       {
         source: {
@@ -362,13 +362,25 @@ class App extends Component {
     this.setState((prevState) => {
       return {
         ...prevState,
+        isLoading: true,
         chosenCountry: country,
         chosenCategory: category,
       };
     });
 
     // loading complete test
-    setTimeout(this.loadingComplete, 2000);
+    setTimeout(this.loadingComplete, 3000);
+  };
+
+  resetApp = () => {
+    this.setState((prevState) => {
+      return {
+        ...prevState,
+        isLoading: false,
+        chosenCountry: null,
+        chosenCategory: null,
+      };
+    });
   };
 
   componentDidMount() {
@@ -392,6 +404,7 @@ class App extends Component {
           isLoading={this.state.isLoading}
           chosenCountry={this.state.chosenCountry}
           chosenCategory={this.state.chosenCategory}
+          resetApp={this.resetApp}
         >
           {this.state.chosenCountry && this.state.chosenCategory ? (
             <Fragment>

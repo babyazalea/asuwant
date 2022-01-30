@@ -6,10 +6,13 @@ import categoriesData from "../../assets/categoies.json";
 import styles from "./Options.module.css";
 
 class Options extends Component {
-  state = {
-    selectedCountry: null,
-    selectedCategory: null,
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      selectedCountry: null,
+      selectedCategory: null,
+    };
+  }
 
   getFlagEmoji(countryCode) {
     const codePoints = countryCode
@@ -130,8 +133,9 @@ class Options extends Component {
             }
             className={
               this.state.selectedCountry !== null &&
-              this.state.selectedCategory !== null &&
-              styles.active
+              this.state.selectedCategory !== null
+                ? styles.active
+                : ""
             }
           >
             {this.state.selectedCountry === null ||

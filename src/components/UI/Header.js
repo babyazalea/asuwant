@@ -17,7 +17,10 @@ class Header extends Component {
           {this.props.chosenCountry && this.props.chosenCategory && (
             <div className={styles["nav-right"]}>
               {!this.props.isLoading && (
-                <button className={styles["redo-button"]}>
+                <button
+                  className={styles["redo-button"]}
+                  onClick={() => this.props.resetApp()}
+                >
                   <FontAwesomeIcon icon={faRedo} /> 국가 & 카테고리 재설정
                 </button>
               )}
