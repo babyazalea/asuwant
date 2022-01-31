@@ -14,6 +14,25 @@ class Header extends Component {
     return String.fromCodePoint(...codePoints);
   }
 
+  optionsText = () => {
+    if (this.props.chosenCountry && this.props.chosenCategory) {
+      return `${this.props.chosenCountry["kor-name"]}의 ${
+        this.props.chosenCategory["kor-name"]
+      } 뉴스${this.props.isLoading ? " 불러오는 중..." : "를 보고 있습니다."}`;
+    }
+  };
+
+  optionsSm = () => {
+    if (this.props.chosenCountry && this.props.chosenCategory) {
+      return (
+        <span className={styles["options-text-sm"]}>
+          <span>{this.getFlagEmoji(this.props.chosenCountry["code"])}</span>
+          <span>{this.props.chosenCategory["kor-name"]}</span>
+        </span>
+      );
+    }
+  };
+
   render() {
     return (
       <header className={styles.header}>
@@ -30,19 +49,10 @@ class Header extends Component {
           {this.props.chosenCountry && this.props.chosenCategory && (
             <div className={styles["nav-right"]}>
               <div className={styles.options}>
-                <span className={styles["options-text-lg"]}>{`${
-                  this.props.chosenCountry["kor-name"]
-                }의 ${this.props.chosenCategory["kor-name"]} 뉴스${
-                  this.props.isLoading ? " 불러오는 중..." : "를 보고 있습니다."
-                }`}</span>
-                {!this.props.isLoading && (
-                  <span className={styles["options-text-sm"]}>
-                    <span>
-                      {this.getFlagEmoji(this.props.chosenCountry["code"])}
-                    </span>
-                    <span>{this.props.chosenCategory["kor-name"]}</span>
-                  </span>
-                )}
+                <span className={styles["options-text-lg"]}>
+                  {this.optionsText()}
+                </span>
+                {!this.props.isLoading && this.optionsSm()}
               </div>
               {!this.props.isLoading && (
                 <button
