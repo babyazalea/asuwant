@@ -1,8 +1,7 @@
 .main {
   box-sizing: border-box;
   width: 60%;
-  height: 75%;
-  margin-top: 4rem;
+  height: fit-content;
   display: flex;
   align-items: center;
   justify-content: center;

@@ -120,7 +120,13 @@ class Options extends Component {
   render() {
     return (
       <div className={styles.options}>
-        <div className={styles["country-buttons"]}>
+        <div
+          className={
+            this.state.selectedCountry
+              ? `${styles["country-buttons"]} ${styles.selected}`
+              : styles["country-buttons"]
+          }
+        >
           {this.countryButtons(this.state.selectedCountry)}
         </div>
         <hr className={styles.hr} />
