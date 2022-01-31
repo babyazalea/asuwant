@@ -33,6 +33,20 @@ class Header extends Component {
     }
   };
 
+  resetButton = () => {
+    return (
+      <button
+        className={styles["reset-button"]}
+        onClick={() => this.props.resetApp()}
+      >
+        <FontAwesomeIcon icon={faRedo} />
+        <span className={styles["reset-button-text"]}>
+          국가 & 카테고리 재설정
+        </span>
+      </button>
+    );
+  };
+
   render() {
     return (
       <header className={styles.header}>
@@ -54,17 +68,7 @@ class Header extends Component {
                 </span>
                 {!this.props.isLoading && this.optionsSm()}
               </div>
-              {!this.props.isLoading && (
-                <button
-                  className={styles["reset-button"]}
-                  onClick={() => this.props.resetApp()}
-                >
-                  <FontAwesomeIcon icon={faRedo} />
-                  <span className={styles["reset-button-text"]}>
-                    국가 & 카테고리 재설정
-                  </span>
-                </button>
-              )}
+              {!this.props.isLoading && this.resetButton()}
             </div>
           )}
         </nav>
