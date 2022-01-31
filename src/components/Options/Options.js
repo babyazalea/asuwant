@@ -106,6 +106,17 @@ class Options extends Component {
     }
   };
 
+  confirmButtonText = () => {
+    if (
+      this.state.selectedCountry === null ||
+      this.state.selectedCategory === null
+    ) {
+      return "국가와 분류를 선택해주세요";
+    } else {
+      return `${this.state.selectedCountry["kor-name"]}의 ${this.state.selectedCategory["kor-name"]} 뉴스 골라서 보기`;
+    }
+  };
+
   render() {
     return (
       <div className={styles.options}>
@@ -138,10 +149,7 @@ class Options extends Component {
                 : ""
             }
           >
-            {this.state.selectedCountry === null ||
-            this.state.selectedCategory === null
-              ? "국가와 분류를 선택해주세요"
-              : `${this.state.selectedCountry["kor-name"]}의 ${this.state.selectedCategory["kor-name"]} 뉴스 골라서 보기`}
+            {this.confirmButtonText()}
           </button>
         </div>
       </div>
