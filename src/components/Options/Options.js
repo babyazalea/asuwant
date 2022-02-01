@@ -93,7 +93,10 @@ class Options extends Component {
       );
 
       return (
-        <button onClick={() => this.resetCategory()}>
+        <button
+          className={styles["selected-button"]}
+          onClick={() => this.resetCategory()}
+        >
           {foundCategory["kor-name"]}
         </button>
       );

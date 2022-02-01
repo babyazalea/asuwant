@@ -5,6 +5,7 @@
   align-items: center;
   gap: 1rem;
   margin-bottom: 1rem;
+  word-break: keep-all;
 }
 
 .options button {
@@ -41,9 +42,10 @@
   margin-right: 0.3rem;
 }
 
-.selected-button {
+.options .selected-button {
   width: 99px;
   height: 62px;
+  background-color: #fff8e7;
 }
 
 .category-buttons {
@@ -129,6 +131,14 @@
 }
 
 @media (max-width: 500px) {
+  .country-buttons.selected {
+    min-height: 20rem;
+  }
+
+  .country-buttons button {
+    font-size: 0.8rem;
+  }
+
   .category-buttons {
     display: grid;
     gap: 1rem;
