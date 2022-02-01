@@ -1,7 +1,11 @@
-import { Component } from "react";
+import { Component, Fragment } from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faRedo, faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
+import {
+  faRedo,
+  faQuestionCircle,
+  faSpinner,
+} from "@fortawesome/free-solid-svg-icons";
 
 import styles from "./Header.module.css";
 
@@ -14,21 +18,31 @@ class Header extends Component {
     return String.fromCodePoint(...codePoints);
   }
 
-  optionsText = () => {
+  optionsLgText = () => {
     if (this.props.chosenCountry && this.props.chosenCategory) {
+      console.log(this.props.chosenCountry["kor-name"]);
+
       return `${this.props.chosenCountry["kor-name"]}의 ${
         this.props.chosenCategory["kor-name"]
       } 뉴스${this.props.isLoading ? " 불러오는 중..." : "를 보고 있습니다."}`;
     }
   };
 
-  optionsSm = () => {
+  optionsSmText = () => {
+    if (this.props.isLoading) {
+      return (
+        <span>
+          <FontAwesomeIcon icon={faSpinner} pulse />
+        </span>
+      );
+    }
+
     if (this.props.chosenCountry && this.props.chosenCategory) {
       return (
-        <span className={styles["options-text-sm"]}>
+        <Fragment>
           <span>{this.getFlagEmoji(this.props.chosenCountry["code"])}</span>
           <span>{this.props.chosenCategory["kor-name"]}</span>
-        </span>
+        </Fragment>
       );
     }
   };
@@ -64,9 +78,11 @@ class Header extends Component {
             <div className={styles["nav-right"]}>
               <div className={styles.options}>
                 <span className={styles["options-text-lg"]}>
-                  {this.optionsText()}
+                  {this.optionsLgText()}
                 </span>
-                {!this.props.isLoading && this.optionsSm()}
+                <span className={styles["options-text-sm"]}>
+                  {this.optionsSmText()}
+                </span>
               </div>
               {!this.props.isLoading && this.resetButton()}
             </div>

@@ -99,7 +99,8 @@
   }
 
   .options-text-sm {
-    display: block;
+    display: flex;
+    gap: 0.5rem;
   }
 }
 
@@ -142,8 +143,6 @@
   }
 
   .options-text-sm {
-    display: flex;
     font-size: 0.8rem;
-    gap: 0.5rem;
   }
 }
