@@ -19,3 +19,9 @@
   align-items: flex-start;
   overflow: hidden;
 }
+
+@media (max-width: 768px) {
+  .news {
+    width: 85%;
+  }
+}

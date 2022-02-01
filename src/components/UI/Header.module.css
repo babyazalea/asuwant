@@ -127,8 +127,7 @@
   }
 
   .reset-button {
-    width: 2rem;
-    height: 40%;
+    padding: 0.7rem;
   }
 
   .reset-button-text {
@@ -136,9 +135,7 @@
   }
 
   .options {
-    width: 3.5rem;
-    height: 40%;
-    padding: 0;
+    padding: 0.5rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -146,7 +143,7 @@
 
   .options-text-sm {
     display: flex;
-    flex-direction: column;
     font-size: 0.8rem;
+    gap: 0.5rem;
   }
 }

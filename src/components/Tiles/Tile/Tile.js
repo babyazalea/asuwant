@@ -6,7 +6,9 @@ class Tile extends Component {
   render() {
     return (
       <div className={styles.tile}>
-        <span>{this.props.article.title}</span>
+        <span className={styles["article-title"]}>
+          {this.props.article.title}
+        </span>
         <a href={this.props.article.url}>기사 링크로 이동</a>
       </div>
     );
