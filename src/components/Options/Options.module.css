@@ -29,11 +29,21 @@
 }
 
 .country-buttons button {
-  padding: 1rem 0.5rem 1rem 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem;
 }
 
 .country-buttons button span:first-child {
   margin-right: 0.3rem;
+}
+
+.selected-button {
+  width: 99px;
+  height: 62px;
 }
 
 .category-buttons {
@@ -43,6 +53,13 @@
   justify-content: center;
   align-items: center;
   gap: 1rem;
+}
+
+.category-buttons.selected {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .category-buttons button {
@@ -75,7 +92,7 @@
   color: rgba(0, 0, 0, 0.2);
 }
 
-@media (min-width: 768px) {
+@media (min-width: 920px) {
   .country-buttons {
     display: grid;
     gap: 1rem;
@@ -83,10 +100,38 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 920px) {
   .country-buttons {
     display: grid;
     gap: 1rem;
     grid-template-columns: repeat(4, 1fr);
+  }
+
+  .category-buttons {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .country-buttons {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .category-buttons {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 500px) {
+  .category-buttons {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(2, 1fr);
   }
 }

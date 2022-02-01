@@ -65,7 +65,10 @@ class Options extends Component {
       );
 
       return (
-        <button onClick={() => this.resetCountry()}>
+        <button
+          className={styles["selected-button"]}
+          onClick={() => this.resetCountry()}
+        >
           <span>{this.getFlagEmoji(foundCountry.code)}</span>
           <span>{foundCountry["kor-name"]}</span>
         </button>
@@ -130,7 +133,13 @@ class Options extends Component {
           {this.countryButtons(this.state.selectedCountry)}
         </div>
         <hr className={styles.hr} />
-        <div className={styles["category-buttons"]}>
+        <div
+          className={
+            this.state.selectedCategory
+              ? `${styles["category-buttons"]} ${styles.selected}`
+              : styles["category-buttons"]
+          }
+        >
           {this.categoryButtons(this.state.selectedCategory)}
         </div>
         <hr className={styles.hr} />
