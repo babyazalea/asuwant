@@ -1,12 +1,21 @@
 .main {
   box-sizing: border-box;
   width: 60%;
-  height: fit-content;
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-top: 2rem;
+}
+
+.loading {
+  height: 100%;
+  margin-top: 0;
 }
 
 .news {
-  /* height: fit-content; */
+  width: 70%;
+  height: 100%;
+  margin-top: 3rem;
+  align-items: flex-start;
+  overflow: hidden;
 }
