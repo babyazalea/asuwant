@@ -104,6 +104,10 @@
 }
 
 @media (max-width: 768px) {
+  .nav {
+    width: 80%;
+  }
+
   .nav-left {
     gap: 1.5rem;
     align-items: center;
