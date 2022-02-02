@@ -6,11 +6,13 @@ class Main extends Component {
   mainClassName = () => {
     if (this.props.isLoading) {
       return `${styles.main} ${styles.loading}`;
-    } else if (this.props.choiceIsOver) {
-      return `${styles.main} ${styles.news}`;
-    } else {
-      return styles.main;
     }
+
+    if (this.props.choiceIsOver) {
+      return `${styles.main} ${styles.news}`;
+    }
+
+    return styles.main;
   };
 
   render() {

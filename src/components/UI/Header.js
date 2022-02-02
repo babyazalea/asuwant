@@ -20,8 +20,6 @@ class Header extends Component {
 
   optionsLgText = () => {
     if (this.props.chosenCountry && this.props.chosenCategory) {
-      console.log(this.props.chosenCountry["kor-name"]);
-
       return `${this.props.chosenCountry["kor-name"]}의 ${
         this.props.chosenCategory["kor-name"]
       } 뉴스${this.props.isLoading ? " 불러오는 중..." : "를 보고 있습니다."}`;

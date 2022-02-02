@@ -1,0 +1,36 @@
+.credits {
+  width: 30rem;
+  height: 30rem;
+  margin: 5rem;
+  display: flex;
+  align-items: center;
+}
+
+.credits-wrapper {
+  box-sizing: border-box;
+  padding: 1rem;
+}
+
+.credits p {
+  line-height: 1.5;
+}
+
+.credits a {
+  color: black;
+}
+
+.github-link {
+  font-size: 1.5rem;
+}
+
+.copyright {
+  font-size: 0.9rem;
+}
+
+.copyright svg {
+  margin-right: 0.5rem;
+}
+
+.copyright a {
+  text-decoration: none;
+}

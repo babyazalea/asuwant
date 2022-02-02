@@ -4,9 +4,11 @@ import axios from "axios";
 import Layout from "./components/UI/Layout";
 import Loading from "./components/UI/Loading";
 import Tiles from "./components/Tiles/Tiles";
+import Options from "./components/Options/Options";
 
 import "./App.css";
-import Options from "./components/Options/Options";
+import { Route, Routes } from "react-router-dom";
+import Credits from "./components/Credits/Credits";
 
 class App extends Component {
   state = {
@@ -14,13 +16,6 @@ class App extends Component {
     chosenCountry: null,
     chosenCategory: null,
     articles: [],
-  };
-
-  // loading complete test
-  loadingComplete = () => {
-    this.setState((prevState) => {
-      return { ...prevState, isLoading: false };
-    });
   };
 
   confirmedOptions = (country, category) => {
@@ -71,16 +66,12 @@ class App extends Component {
     });
   };
 
-  render() {
-    return (
-      <div className="App">
-        <Layout
-          isLoading={this.state.isLoading}
-          chosenCountry={this.state.chosenCountry}
-          chosenCategory={this.state.chosenCategory}
-          resetApp={this.resetApp}
-        >
-          {this.state.chosenCountry && this.state.chosenCategory ? (
+  routes = () => (
+    <Routes>
+      <Route
+        path="/"
+        element={
+          this.state.chosenCountry && this.state.chosenCategory ? (
             <Fragment>
               {this.state.isLoading ? (
                 <Loading />
@@ -90,7 +81,23 @@ class App extends Component {
             </Fragment>
           ) : (
             <Options confirmedOptions={this.confirmedOptions} />
-          )}
+          )
+        }
+      />
+      <Route path="/credits" element={<Credits />} />
+    </Routes>
+  );
+
+  render() {
+    return (
+      <div className="App">
+        <Layout
+          isLoading={this.state.isLoading}
+          chosenCountry={this.state.chosenCountry}
+          chosenCategory={this.state.chosenCategory}
+          resetApp={this.resetApp}
+        >
+          {this.routes()}
         </Layout>
       </div>
     );
