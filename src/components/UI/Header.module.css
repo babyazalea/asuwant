@@ -30,6 +30,16 @@
   font-weight: 400;
 }
 
+.logo a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.credits a {
+  color: inherit;
+  text-decoration: none;
+}
+
 .credits-text-lg {
   font-size: 1.1rem;
 }

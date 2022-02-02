@@ -8,6 +8,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 import styles from "./Header.module.css";
+import { Link } from "react-router-dom";
 
 class Header extends Component {
   getFlagEmoji(countryCode) {
@@ -20,8 +21,6 @@ class Header extends Component {
 
   optionsLgText = () => {
     if (this.props.chosenCountry && this.props.chosenCategory) {
-      console.log(this.props.chosenCountry["kor-name"]);
-
       return `${this.props.chosenCountry["kor-name"]}의 ${
         this.props.chosenCategory["kor-name"]
       } 뉴스${this.props.isLoading ? " 불러오는 중..." : "를 보고 있습니다."}`;
@@ -66,12 +65,16 @@ class Header extends Component {
       <header className={styles.header}>
         <nav className={styles.nav}>
           <div className={styles["nav-left"]}>
-            <div className={styles.logo}>asuwant</div>
+            <div className={styles.logo}>
+              <Link to="/">asuwant</Link>
+            </div>
             <div className={styles.credits}>
-              <span className={styles["credits-text-lg"]}>credits</span>
-              <span className={styles["credits-text-sm"]}>
-                <FontAwesomeIcon icon={faQuestionCircle} />
-              </span>
+              <Link to="/credits">
+                <span className={styles["credits-text-lg"]}>credits</span>
+                <span className={styles["credits-text-sm"]}>
+                  <FontAwesomeIcon icon={faQuestionCircle} />
+                </span>
+              </Link>
             </div>
           </div>
           {this.props.chosenCountry && this.props.chosenCategory && (
