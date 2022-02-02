@@ -8,6 +8,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 import styles from "./Header.module.css";
+import { Link } from "react-router-dom";
 
 class Header extends Component {
   getFlagEmoji(countryCode) {
@@ -64,12 +65,16 @@ class Header extends Component {
       <header className={styles.header}>
         <nav className={styles.nav}>
           <div className={styles["nav-left"]}>
-            <div className={styles.logo}>asuwant</div>
+            <div className={styles.logo}>
+              <Link to="/">asuwant</Link>
+            </div>
             <div className={styles.credits}>
-              <span className={styles["credits-text-lg"]}>credits</span>
-              <span className={styles["credits-text-sm"]}>
-                <FontAwesomeIcon icon={faQuestionCircle} />
-              </span>
+              <Link to="/credits">
+                <span className={styles["credits-text-lg"]}>credits</span>
+                <span className={styles["credits-text-sm"]}>
+                  <FontAwesomeIcon icon={faQuestionCircle} />
+                </span>
+              </Link>
             </div>
           </div>
           {this.props.chosenCountry && this.props.chosenCategory && (
