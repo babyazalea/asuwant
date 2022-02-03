@@ -19,44 +19,48 @@ class Header extends Component {
     return String.fromCodePoint(...codePoints);
   }
 
-  optionsLgText = () => {
-    if (this.props.chosenCountry && this.props.chosenCategory) {
-      return `${this.props.chosenCountry["kor-name"]}의 ${
-        this.props.chosenCategory["kor-name"]
-      } 뉴스${this.props.isLoading ? " 불러오는 중..." : "를 보고 있습니다."}`;
-    }
-  };
-
-  optionsSmText = () => {
-    if (this.props.isLoading) {
-      return (
-        <span>
-          <FontAwesomeIcon icon={faSpinner} pulse />
-        </span>
-      );
+  navRight = () => {
+    if (!this.props.chosenCountry && !this.props.chosenCategory) {
+      return;
     }
 
-    if (this.props.chosenCountry && this.props.chosenCategory) {
-      return (
-        <Fragment>
-          <span>{this.getFlagEmoji(this.props.chosenCountry["code"])}</span>
-          <span>{this.props.chosenCategory["kor-name"]}</span>
-        </Fragment>
-      );
-    }
-  };
-
-  resetButton = () => {
     return (
-      <button
-        className={styles["reset-button"]}
-        onClick={() => this.props.resetApp()}
-      >
-        <FontAwesomeIcon icon={faRedo} />
-        <span className={styles["reset-button-text"]}>
-          국가 & 카테고리 재설정
-        </span>
-      </button>
+      <div className={styles["nav-right"]}>
+        <div className={styles.options}>
+          <span className={styles["options-text-lg"]}>
+            <span>
+              {this.props.chosenCountry["kor-name"]}의{" "}
+              {this.props.chosenCategory["kor-name"]} 뉴스
+              {this.props.isLoading ? " 불러오는 중..." : "를 보고 있습니다."}
+            </span>
+          </span>
+          <span className={styles["options-text-sm"]}>
+            {this.props.isLoading ? (
+              <span>
+                <FontAwesomeIcon icon={faSpinner} pulse />
+              </span>
+            ) : (
+              <Fragment>
+                <span>
+                  {this.getFlagEmoji(this.props.chosenCountry["code"])}
+                </span>
+                <span>{this.props.chosenCategory["kor-name"]}</span>
+              </Fragment>
+            )}
+          </span>
+        </div>
+        {!this.props.isLoading && (
+          <button
+            className={styles["reset-button"]}
+            onClick={() => this.props.resetApp()}
+          >
+            <FontAwesomeIcon icon={faRedo} />
+            <span className={styles["reset-button-text"]}>
+              국가 & 카테고리 재설정
+            </span>
+          </button>
+        )}
+      </div>
     );
   };
 
@@ -77,19 +81,7 @@ class Header extends Component {
               </Link>
             </div>
           </div>
-          {this.props.chosenCountry && this.props.chosenCategory && (
-            <div className={styles["nav-right"]}>
-              <div className={styles.options}>
-                <span className={styles["options-text-lg"]}>
-                  {this.optionsLgText()}
-                </span>
-                <span className={styles["options-text-sm"]}>
-                  {this.optionsSmText()}
-                </span>
-              </div>
-              {!this.props.isLoading && this.resetButton()}
-            </div>
-          )}
+          {this.props.isError && this.navRight()}
         </nav>
       </header>
     );
