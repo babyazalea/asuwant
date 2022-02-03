@@ -4,22 +4,6 @@ import { NavLink, useNavigate } from "react-router-dom";
 import styles from "./ErrorPage.module.css";
 
 function ErrorPage(props) {
-  // state = {
-  //   rateLimited: false,
-  // };
-
-  // componentDidMount() {
-  //   if (this.props.errorCode === "rateLimited") {
-  //     this.setState({
-  //       rateLimited: true,
-  //     });
-  //   }
-
-  //   if (this.props.errorCode === null) {
-  //     this.props.history.push("/");
-  //   }
-  // }
-
   const [errorCode, setErrorCode] = useState(null);
 
   const navigate = useNavigate();
@@ -31,7 +15,7 @@ function ErrorPage(props) {
     }
 
     navigate("/");
-  }, [props.errorCode, navigate]);
+  }, [navigate, props.errorCode]);
 
   const errorMessage =
     errorCode === "rateLimited" ? (

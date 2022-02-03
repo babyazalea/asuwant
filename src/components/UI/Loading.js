@@ -1,5 +1,6 @@
-import styles from "./Loading.module.css";
 import expandingCircle from "../../assets/the_expanding_circle.png";
+
+import styles from "./Loading.module.css";
 
 function Loading() {
   return (

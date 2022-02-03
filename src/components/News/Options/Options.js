@@ -1,7 +1,7 @@
 import { useState } from "react";
 
-import countriesData from "../../assets/countries.json";
-import categoriesData from "../../assets/categoies.json";
+import countriesData from "../../../assets/countries.json";
+import categoriesData from "../../../assets/categoies.json";
 
 import styles from "./Options.module.css";
 

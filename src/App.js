@@ -1,31 +1,33 @@
-import { Fragment, useState } from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 import Layout from "./components/UI/Layout";
-import Loading from "./components/UI/Loading";
-import ErrorPage from "./components/Error/ErrorPage";
-import Options from "./components/Options/Options";
+import News from "./components/News/News";
 import Credits from "./components/Credits/Credits";
-import Tiles from "./components/Tiles/Tiles";
+import ErrorPage from "./components/Error/ErrorPage";
 
 import "./App.css";
 
 function App() {
-  // state = {
-  //   isLoading: false,
-  //   errorCode: null,
-  //   chosenCountry: null,
-  //   chosenCategory: null,
-  //   articles: [],
-  // };
   const [isLoading, setIsLoading] = useState(false);
   const [errorCode, setErrorCode] = useState(null);
   const [chosenCountry, setChosenCountry] = useState(null);
   const [chosenCategory, setChosenCategory] = useState(null);
   const [articles, setArticles] = useState([]);
 
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (errorCode) {
+      navigate("/error");
+    }
+  }, [navigate, errorCode]);
+
   const confirmedOptions = (country, category) => {
+    setChosenCountry(country);
+    setChosenCategory(category);
+
     // start loading
     setIsLoading(true);
 
@@ -68,28 +70,25 @@ function App() {
       <Route
         path="/"
         element={
-          errorCode !== null ? (
-            <Navigate to="/error" />
-          ) : chosenCountry && chosenCategory ? (
-            <Fragment>
-              {isLoading ? (
-                <Loading />
-              ) : (
-                <Fragment>
-                  {errorCode == null && <Tiles articles={articles} />}
-                </Fragment>
-              )}
-            </Fragment>
-          ) : (
-            <Options confirmedOptions={confirmedOptions} />
+          errorCode === null && (
+            <News
+              isLoading={isLoading}
+              chosenCountry={chosenCountry}
+              chosenCategory={chosenCategory}
+              articles={articles}
+              confirmedOptions={confirmedOptions}
+            />
           )
         }
-      ></Route>
-      <Route path="/credits" element={<Credits />} />
-      <Route
-        path="/error"
-        element={<ErrorPage errorCode={errorCode} resetApp={resetApp} />}
       />
+      <Route path="/credits" element={<Credits />} />
+      {errorCode !== null && (
+        <Route
+          path="/error"
+          element={<ErrorPage errorCode={errorCode} resetApp={resetApp} />}
+        />
+      )}
+      <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   );
 
