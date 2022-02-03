@@ -1,64 +1,39 @@
-import { Component } from "react";
+import { useState } from "react";
 
 import countriesData from "../../assets/countries.json";
 import categoriesData from "../../assets/categoies.json";
 
 import styles from "./Options.module.css";
 
-class Options extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      selectedCountry: null,
-      selectedCategory: null,
-    };
-  }
+function Options(props) {
+  const [selectedCountry, setSelectedCountry] = useState(null);
+  const [selectedCategory, setSelectedCategory] = useState(null);
 
-  getFlagEmoji(countryCode) {
+  const getFlagEmoji = (countryCode) => {
     const codePoints = countryCode
       .toUpperCase()
       .split("")
       .map((char) => 127397 + char.charCodeAt());
     return String.fromCodePoint(...codePoints);
-  }
-
-  selectedCountryHandler = (countryCode) => {
-    this.setState((prevState) => {
-      return {
-        ...prevState,
-        selectedCountry: countryCode,
-      };
-    });
   };
 
-  selectedCategoryHandler = (category) => {
-    this.setState((prevState) => {
-      return {
-        ...prevState,
-        selectedCategory: category,
-      };
-    });
+  const selectedCountryHandler = (countryCode) => {
+    setSelectedCountry(countryCode);
   };
 
-  resetCountry = () => {
-    this.setState((prevState) => {
-      return {
-        ...prevState,
-        selectedCountry: null,
-      };
-    });
+  const selectedCategoryHandler = (category) => {
+    setSelectedCategory(category);
   };
 
-  resetCategory = () => {
-    this.setState((prevState) => {
-      return {
-        ...prevState,
-        selectedCategory: null,
-      };
-    });
+  const resetCountry = () => {
+    setSelectedCountry(null);
   };
 
-  countryButtons = (selectedCountry) => {
+  const resetCategory = () => {
+    setSelectedCategory(null);
+  };
+
+  const countryButtons = (selectedCountry) => {
     if (selectedCountry) {
       const foundCountry = countriesData.countries.find(
         (country) => country.code === selectedCountry.code
@@ -67,9 +42,9 @@ class Options extends Component {
       return (
         <button
           className={styles["selected-button"]}
-          onClick={() => this.resetCountry()}
+          onClick={() => resetCountry()}
         >
-          <span>{this.getFlagEmoji(foundCountry.code)}</span>
+          <span>{getFlagEmoji(foundCountry.code)}</span>
           <span>{foundCountry["kor-name"]}</span>
         </button>
       );
@@ -77,16 +52,16 @@ class Options extends Component {
       return countriesData.countries.map((country) => (
         <button
           key={country.name}
-          onClick={() => this.selectedCountryHandler(country)}
+          onClick={() => selectedCountryHandler(country)}
         >
-          <span>{this.getFlagEmoji(country.code)}</span>
+          <span>{getFlagEmoji(country.code)}</span>
           <span>{country["kor-name"]}</span>
         </button>
       ));
     }
   };
 
-  categoryButtons = (selectedCategory) => {
+  const categoryButtons = (selectedCategory) => {
     if (selectedCategory) {
       const foundCategory = categoriesData.categories.find(
         (category) => category.name === selectedCategory.name
@@ -95,7 +70,7 @@ class Options extends Component {
       return (
         <button
           className={styles["selected-button"]}
-          onClick={() => this.resetCategory()}
+          onClick={() => resetCategory()}
         >
           {foundCategory["kor-name"]}
         </button>
@@ -104,7 +79,7 @@ class Options extends Component {
       return categoriesData.categories.map((category) => (
         <button
           key={category.name}
-          onClick={() => this.selectedCategoryHandler(category)}
+          onClick={() => selectedCategoryHandler(category)}
         >
           {category["kor-name"]}
         </button>
@@ -112,67 +87,52 @@ class Options extends Component {
     }
   };
 
-  confirmButtonText = () => {
-    if (
-      this.state.selectedCountry === null ||
-      this.state.selectedCategory === null
-    ) {
-      return "국가와 분류를 선택해주세요";
-    } else {
-      return `${this.state.selectedCountry["kor-name"]}의 ${this.state.selectedCategory["kor-name"]} 뉴스 골라서 보기`;
-    }
-  };
+  const confirmButtonText =
+    selectedCountry === null || selectedCategory === null
+      ? "국가와 분류를 선택해주세요"
+      : `${selectedCountry["kor-name"]}의 ${selectedCategory["kor-name"]} 뉴스 골라서 보기`;
 
-  render() {
-    return (
-      <div className={styles.options}>
-        <div
-          className={
-            this.state.selectedCountry
-              ? `${styles["country-buttons"]} ${styles.selected}`
-              : styles["country-buttons"]
-          }
-        >
-          {this.countryButtons(this.state.selectedCountry)}
-        </div>
-        <hr className={styles.hr} />
-        <div
-          className={
-            this.state.selectedCategory
-              ? `${styles["category-buttons"]} ${styles.selected}`
-              : styles["category-buttons"]
-          }
-        >
-          {this.categoryButtons(this.state.selectedCategory)}
-        </div>
-        <hr className={styles.hr} />
-        <div className={styles["confirm-button"]}>
-          <button
-            disabled={
-              this.state.selectedCountry === null ||
-              this.state.selectedCategory === null
-                ? true
-                : false
-            }
-            onClick={() =>
-              this.props.confirmedOptions(
-                this.state.selectedCountry,
-                this.state.selectedCategory
-              )
-            }
-            className={
-              this.state.selectedCountry !== null &&
-              this.state.selectedCategory !== null
-                ? styles.active
-                : ""
-            }
-          >
-            {this.confirmButtonText()}
-          </button>
-        </div>
+  return (
+    <div className={styles.options}>
+      <div
+        className={
+          selectedCountry
+            ? `${styles["country-buttons"]} ${styles.selected}`
+            : styles["country-buttons"]
+        }
+      >
+        {countryButtons(selectedCountry)}
       </div>
-    );
-  }
+      <hr className={styles.hr} />
+      <div
+        className={
+          selectedCategory
+            ? `${styles["category-buttons"]} ${styles.selected}`
+            : styles["category-buttons"]
+        }
+      >
+        {categoryButtons(selectedCategory)}
+      </div>
+      <hr className={styles.hr} />
+      <div className={styles["confirm-button"]}>
+        <button
+          disabled={
+            selectedCountry === null || selectedCategory === null ? true : false
+          }
+          onClick={() =>
+            props.confirmedOptions(selectedCountry, selectedCategory)
+          }
+          className={
+            selectedCountry !== null && selectedCategory !== null
+              ? styles.active
+              : ""
+          }
+        >
+          {confirmButtonText}
+        </button>
+      </div>
+    </div>
+  );
 }
 
 export default Options;
