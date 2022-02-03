@@ -1,12 +1,10 @@
 import styles from "./Tile.module.css";
 
-function Tile() {
+function Tile(props) {
   return (
     <div className={styles.tile}>
-      <span className={styles["article-title"]}>
-        {this.props.article.title}
-      </span>
-      <a href={this.props.article.url}>기사 링크로 이동</a>
+      <span className={styles["article-title"]}>{props.article.title}</span>
+      <a href={props.article.url}>기사 링크로 이동</a>
     </div>
   );
 }
