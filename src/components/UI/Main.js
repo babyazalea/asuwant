@@ -4,12 +4,20 @@ import styles from "./Main.module.css";
 
 class Main extends Component {
   mainClassName = () => {
-    if (this.props.isLoading) {
-      return `${styles.main} ${styles.loading}`;
+    if (
+      !this.props.isLoading &&
+      !this.props.isError &&
+      this.props.choiceIsOver
+    ) {
+      return `${styles.main} ${styles.news}`;
     }
 
-    if (this.props.choiceIsOver) {
-      return `${styles.main} ${styles.news}`;
+    if (
+      !this.props.isLoading &&
+      !this.props.isError &&
+      !this.props.choiceIsOver
+    ) {
+      return `${styles.main} ${styles.options}`;
     }
 
     return styles.main;

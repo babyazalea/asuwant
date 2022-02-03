@@ -8,14 +8,16 @@ class Layout extends Component {
     return (
       <Fragment>
         <Header
+          isError={this.props.isError}
           isLoading={this.props.isLoading}
           chosenCountry={this.props.chosenCountry}
           chosenCategory={this.props.chosenCategory}
           resetApp={this.props.resetApp}
         />
         <Main
-          choiceIsOver={this.props.chosenCountry && this.props.chosenCategory}
+          isError={this.props.isError}
           isLoading={this.props.isLoading}
+          choiceIsOver={this.props.chosenCountry && this.props.chosenCategory}
         >
           {this.props.children}
         </Main>

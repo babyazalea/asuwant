@@ -81,7 +81,7 @@ class Header extends Component {
               </Link>
             </div>
           </div>
-          {this.props.isError && this.navRight()}
+          {!this.props.isError && this.navRight()}
         </nav>
       </header>
     );

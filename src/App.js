@@ -1,18 +1,20 @@
 import { Component, Fragment } from "react";
+import { Route, Switch, Redirect } from "react-router-dom";
 import axios from "axios";
 
 import Layout from "./components/UI/Layout";
 import Loading from "./components/UI/Loading";
-import Tiles from "./components/Tiles/Tiles";
+import ErrorPage from "./components/Error/ErrorPage";
 import Options from "./components/Options/Options";
+import Credits from "./components/Credits/Credits";
+import Tiles from "./components/Tiles/Tiles";
 
 import "./App.css";
-import { Route, Routes } from "react-router-dom";
-import Credits from "./components/Credits/Credits";
 
 class App extends Component {
   state = {
     isLoading: false,
+    errorCode: null,
     chosenCountry: null,
     chosenCategory: null,
     articles: [],
@@ -31,14 +33,16 @@ class App extends Component {
 
     const url = process.env.REACT_APP_BACKEND_URL;
 
+    const params = {
+      params: {
+        countryCode: country.code,
+        categoryName: category.name,
+      },
+    };
+
     // api call
     axios
-      .get(url, {
-        params: {
-          countryCode: country.code,
-          categoryName: category.name,
-        },
-      })
+      .get(url, params)
       .then((res) => {
         if (res.status === 200) {
           this.setState((prevState) => {
@@ -50,48 +54,71 @@ class App extends Component {
           });
         }
       })
-      .catch((err) => {
-        console.log(err);
+      .catch((error) => {
+        this.setState((prevState) => {
+          return {
+            ...prevState,
+            isLoading: false,
+            errorCode: error.response
+              ? error.response.data.code
+              : "Error Occurred",
+          };
+        });
       });
   };
 
   resetApp = () => {
-    this.setState((prevState) => {
+    this.setState(() => {
       return {
-        ...prevState,
         isLoading: false,
+        errorCode: null,
         chosenCountry: null,
         chosenCategory: null,
+        articles: [],
       };
     });
   };
 
   routes = () => (
-    <Routes>
-      <Route
-        path="/"
-        element={
-          this.state.chosenCountry && this.state.chosenCategory ? (
-            <Fragment>
-              {this.state.isLoading ? (
-                <Loading />
-              ) : (
-                <Tiles articles={this.state.articles} />
-              )}
-            </Fragment>
-          ) : (
-            <Options confirmedOptions={this.confirmedOptions} />
-          )
-        }
-      />
-      <Route path="/credits" element={<Credits />} />
-    </Routes>
+    <Switch>
+      <Route path="/" exact>
+        {this.state.errorCode !== null ? (
+          <Redirect to="/error" />
+        ) : this.state.chosenCountry && this.state.chosenCategory ? (
+          <Fragment>
+            {this.state.isLoading ? (
+              <Loading />
+            ) : (
+              <Fragment>
+                {this.state.errorCode == null && (
+                  <Tiles articles={this.state.articles} />
+                )}
+              </Fragment>
+            )}
+          </Fragment>
+        ) : (
+          <Options confirmedOptions={this.confirmedOptions} />
+        )}
+      </Route>
+      <Route path="/credits">
+        <Credits />
+      </Route>
+      <Route path="/error">
+        <ErrorPage errorCode={this.state.errorCode} resetApp={this.resetApp} />
+      </Route>
+    </Switch>
   );
+
+  componentDidUpdate() {
+    if (this.state.errorCode !== null) {
+    }
+  }
 
   render() {
     return (
       <div className="App">
         <Layout
+          isError={this.state.errorCode !== null}
           isLoading={this.state.isLoading}
           chosenCountry={this.state.chosenCountry}
           chosenCategory={this.state.chosenCategory}
