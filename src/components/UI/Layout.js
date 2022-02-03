@@ -1,29 +1,27 @@
-import { Component, Fragment } from "react";
+import { Fragment } from "react";
 
 import Header from "./Header";
 import Main from "./Main";
 
-class Layout extends Component {
-  render() {
-    return (
-      <Fragment>
-        <Header
-          isError={this.props.isError}
-          isLoading={this.props.isLoading}
-          chosenCountry={this.props.chosenCountry}
-          chosenCategory={this.props.chosenCategory}
-          resetApp={this.props.resetApp}
-        />
-        <Main
-          isError={this.props.isError}
-          isLoading={this.props.isLoading}
-          choiceIsOver={this.props.chosenCountry && this.props.chosenCategory}
-        >
-          {this.props.children}
-        </Main>
-      </Fragment>
-    );
-  }
+function Layout(props) {
+  return (
+    <Fragment>
+      <Header
+        isError={props.isError}
+        isLoading={props.isLoading}
+        chosenCountry={props.chosenCountry}
+        chosenCategory={props.chosenCategory}
+        resetApp={props.resetApp}
+      />
+      <Main
+        isError={props.isError}
+        isLoading={props.isLoading}
+        choiceIsOver={props.chosenCountry && props.chosenCategory}
+      >
+        {props.children}
+      </Main>
+    </Fragment>
+  );
 }
 
 export default Layout;
