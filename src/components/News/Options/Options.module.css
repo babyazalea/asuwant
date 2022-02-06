@@ -142,7 +142,7 @@
   }
 
   .country-buttons.selected {
-    min-height: 20rem;
+    min-height: 10rem;
   }
 
   .country-buttons button {
