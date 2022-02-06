@@ -15,6 +15,7 @@
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   transition: all 0.2s;
   cursor: pointer;
+  color: black;
 }
 
 .options button:hover {
@@ -120,7 +121,12 @@
   .country-buttons {
     display: grid;
     gap: 1rem;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .country-buttons button {
+    width: 5.5rem;
+    height: 4rem;
   }
 
   .category-buttons {
@@ -131,11 +137,17 @@
 }
 
 @media (max-width: 500px) {
+  .country-buttons {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
   .country-buttons.selected {
     min-height: 20rem;
   }
 
   .country-buttons button {
+    width: 5.5rem;
+    height: 4rem;
     font-size: 0.8rem;
   }
 
