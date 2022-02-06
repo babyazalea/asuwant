@@ -18,3 +18,13 @@
     transform: rotate(360deg);
   }
 }
+
+@media (max-width: 768px) {
+  .loading {
+    background-size: 70%;
+  }
+
+  .expanding-circle {
+    width: 100%;
+  }
+}
