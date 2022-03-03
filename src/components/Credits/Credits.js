@@ -18,7 +18,7 @@ function Credits() {
           </p>
           <p>
             <a
-              href="https://github.com/babyazalea/asuwant-frontend"
+              href="https://github.com/tyange/asuwant-frontend"
               className={styles["github-link"]}
             >
               <FontAwesomeIcon icon={faGithub} />
@@ -27,7 +27,7 @@ function Credits() {
           <p className={styles.copyright}>
             <span>
               <FontAwesomeIcon icon={faCopyright} />
-              <a href="https://babyazalea.gatsbyjs.io/">babayazalea</a>
+              <a href="https://github.com/tyange">tyange</a>
             </span>
           </p>
         </div>
