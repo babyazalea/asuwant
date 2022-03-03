@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/asuwant-frontend/static/css/main.de5c169f.css",
-    "main.js": "/asuwant-frontend/static/js/main.b8ad471e.js",
+    "main.js": "/asuwant-frontend/static/js/main.2d9d9ca5.js",
     "static/js/787.9b14120f.chunk.js": "/asuwant-frontend/static/js/787.9b14120f.chunk.js",
     "static/media/the_expanding_circle.png": "/asuwant-frontend/static/media/the_expanding_circle.241db9b70b44d5b5b120.png",
     "index.html": "/asuwant-frontend/index.html",
     "main.de5c169f.css.map": "/asuwant-frontend/static/css/main.de5c169f.css.map",
-    "main.b8ad471e.js.map": "/asuwant-frontend/static/js/main.b8ad471e.js.map",
+    "main.2d9d9ca5.js.map": "/asuwant-frontend/static/js/main.2d9d9ca5.js.map",
     "787.9b14120f.chunk.js.map": "/asuwant-frontend/static/js/787.9b14120f.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.de5c169f.css",
-    "static/js/main.b8ad471e.js"
+    "static/js/main.2d9d9ca5.js"
   ]
 }
