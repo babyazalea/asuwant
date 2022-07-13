@@ -1,21 +1,28 @@
+import React from "react";
+
 import { Fragment, useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 
 import styles from "./ErrorPage.module.css";
 
-function ErrorPage(props) {
-  const [errorCode, setErrorCode] = useState(null);
+type Props = {
+  error: string;
+  resetApp: () => void;
+};
+
+function ErrorPage({ error, resetApp }: Props) {
+  const [errorCode, setErrorCode] = useState<string | null>(null);
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (props.errorCode !== null) {
-      setErrorCode(props.errorCode);
+    if (error !== null) {
+      setErrorCode(error);
       return;
     }
 
     navigate("/");
-  }, [navigate, props.errorCode]);
+  }, [navigate, errorCode]);
 
   const errorMessage =
     errorCode === "rateLimited" ? (
@@ -37,7 +44,7 @@ function ErrorPage(props) {
   return (
     <div className={styles.error}>
       {errorMessage}
-      <NavLink to="/" onClick={() => props.resetApp()}>
+      <NavLink to="/" onClick={() => resetApp()}>
         다시 하기
       </NavLink>
     </div>

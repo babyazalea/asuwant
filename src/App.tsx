@@ -1,3 +1,4 @@
+import React from "react";
 import { useEffect, useState } from "react";
 import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -7,14 +8,16 @@ import News from "./components/News/News";
 import Credits from "./components/Credits/Credits";
 import ErrorPage from "./components/Error/ErrorPage";
 
+import { Country, Category, Article } from "./types/types";
+
 import "./App.css";
 
 function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [errorCode, setErrorCode] = useState(null);
-  const [chosenCountry, setChosenCountry] = useState(null);
-  const [chosenCategory, setChosenCategory] = useState(null);
-  const [articles, setArticles] = useState([]);
+  const [chosenCountry, setChosenCountry] = useState<Country | null>(null);
+  const [chosenCategory, setChosenCategory] = useState<Category | null>(null);
+  const [articles, setArticles] = useState<Article[]>([]);
 
   const navigate = useNavigate();
 
@@ -24,7 +27,7 @@ function App() {
     }
   }, [navigate, errorCode]);
 
-  const confirmedOptions = (country, category) => {
+  const confirmedOptions = (country: Country, category: Category) => {
     setChosenCountry(country);
     setChosenCategory(category);
 
@@ -42,7 +45,7 @@ function App() {
 
     // api call
     axios
-      .get(url, params)
+      .get(url!, params)
       .then((res) => {
         if (res.status === 200) {
           setArticles(res.data.articles);
@@ -73,8 +76,8 @@ function App() {
           errorCode === null && (
             <News
               isLoading={isLoading}
-              chosenCountry={chosenCountry}
-              chosenCategory={chosenCategory}
+              chosenCountry={chosenCountry!}
+              chosenCategory={chosenCategory!}
               articles={articles}
               confirmedOptions={confirmedOptions}
             />
@@ -85,7 +88,7 @@ function App() {
       {errorCode !== null && (
         <Route
           path="/error"
-          element={<ErrorPage errorCode={errorCode} resetApp={resetApp} />}
+          element={<ErrorPage error={errorCode} resetApp={resetApp} />}
         />
       )}
       <Route path="*" element={<Navigate to="/" />} />
@@ -97,8 +100,8 @@ function App() {
       <Layout
         isError={errorCode !== null}
         isLoading={isLoading}
-        chosenCountry={chosenCountry}
-        chosenCategory={chosenCategory}
+        chosenCountry={chosenCountry!}
+        chosenCategory={chosenCategory!}
         resetApp={resetApp}
       >
         {routes}

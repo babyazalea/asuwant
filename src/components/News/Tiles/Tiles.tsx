@@ -1,21 +1,27 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Tile from "./Tile/Tile";
 
 import styles from "./Tiles.module.css";
 
-function Tiles(props) {
+import { Article } from "../../../types/types";
+
+type Props = {
+  articles: Article[];
+};
+
+function Tiles({ articles }: Props) {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (props.articles.length === 0) {
+    if (articles.length === 0) {
       navigate("/");
     }
-  }, [navigate, props.articles.length]);
+  }, [navigate, articles.length]);
 
   return (
     <div className={styles.tiles}>
-      {props.articles.map((article, index) => (
+      {articles.map((article, index) => (
         <Tile key={index} article={article} />
       ))}
     </div>
