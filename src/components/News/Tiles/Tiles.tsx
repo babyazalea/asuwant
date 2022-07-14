@@ -11,14 +11,6 @@ type Props = {
 };
 
 function Tiles({ articles }: Props) {
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (articles.length === 0) {
-      navigate("/");
-    }
-  }, [navigate, articles.length]);
-
   return (
     <div className={styles.tiles}>
       {articles.map((article, index) => (

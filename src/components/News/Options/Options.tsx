@@ -9,7 +9,7 @@ import styles from "./Options.module.css";
 import { Country, Category } from "../../../types/types";
 
 type Props = {
-  confirmedOptions: (country: Country, category: Category) => void;
+  confirmedOptions: () => void;
 };
 
 function Options({ confirmedOptions }: Props) {
@@ -130,7 +130,7 @@ function Options({ confirmedOptions }: Props) {
           disabled={
             selectedCountry === null || selectedCategory === null ? true : false
           }
-          onClick={() => confirmedOptions(selectedCountry!, selectedCategory!)}
+          onClick={() => confirmedOptions()}
           className={
             selectedCountry !== null && selectedCategory !== null
               ? styles.active

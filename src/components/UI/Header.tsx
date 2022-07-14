@@ -1,5 +1,6 @@
 import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
+import { useNewsStore } from "../../store/newsStore";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -8,25 +9,17 @@ import {
   faSpinner,
 } from "@fortawesome/free-solid-svg-icons";
 
-import { Country, Category } from "../../types/types";
-
 import styles from "./Header.module.css";
 
 type Props = {
   isError: boolean;
   isLoading: boolean;
-  chosenCountry: Country;
-  chosenCategory: Category;
   resetApp: () => void;
 };
 
-function Header({
-  isError,
-  isLoading,
-  chosenCategory,
-  chosenCountry,
-  resetApp,
-}: Props) {
+function Header({ isError, isLoading, resetApp }: Props) {
+  const { selectedCountry, selectedCategory } = useNewsStore();
+
   const getFlagEmoji = (countryCode: string) => {
     const codePoints = countryCode
       .toUpperCase()
@@ -37,13 +30,14 @@ function Header({
 
   let navRight;
 
-  if (chosenCountry && chosenCategory) {
+  if (selectedCountry && selectedCategory) {
     navRight = (
       <div className={styles["nav-right"]}>
         <div className={styles.options}>
           <span className={styles["options-text-lg"]}>
             <span>
-              {chosenCountry["kor-name"]}의 {chosenCategory["kor-name"]} 뉴스
+              {selectedCountry["kor-name"]}의 {selectedCategory["kor-name"]}{" "}
+              뉴스
               {isLoading ? " 불러오는 중..." : "를 보고 있습니다."}
             </span>
           </span>
@@ -54,8 +48,8 @@ function Header({
               </span>
             ) : (
               <Fragment>
-                <span>{getFlagEmoji(chosenCountry["code"])}</span>
-                <span>{chosenCategory["kor-name"]}</span>
+                <span>{getFlagEmoji(selectedCountry["code"])}</span>
+                <span>{selectedCategory["kor-name"]}</span>
               </Fragment>
             )}
           </span>

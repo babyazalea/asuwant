@@ -8,8 +8,6 @@ import News from "./components/News/News";
 import Credits from "./components/Credits/Credits";
 import ErrorPage from "./components/Error/ErrorPage";
 
-import { Country, Category, Article } from "./types/types";
-
 import "./App.css";
 
 function App() {
@@ -29,7 +27,6 @@ function App() {
     setSelectedCountry,
     selectedCategory,
     setSelectedCategory,
-    articles,
     setArticles,
   } = useNewsStore();
 
@@ -77,13 +74,7 @@ function App() {
         path="/"
         element={
           errorCode === null && (
-            <News
-              isLoading={isLoading}
-              chosenCountry={selectedCountry!}
-              chosenCategory={selectedCategory!}
-              articles={articles!}
-              confirmedOptions={confirmedOptions}
-            />
+            <News isLoading={isLoading} confirmedOptions={confirmedOptions} />
           )
         }
       />
@@ -103,8 +94,6 @@ function App() {
       <Layout
         isError={errorCode !== null}
         isLoading={isLoading}
-        chosenCountry={selectedCountry!}
-        chosenCategory={selectedCategory!}
         resetApp={resetApp}
       >
         {routes}
