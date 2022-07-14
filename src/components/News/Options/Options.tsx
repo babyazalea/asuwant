@@ -1,21 +1,24 @@
-import React, { useState } from "react";
+import React from "react";
+import { useNewsStore } from "../../../store/newsStore";
 
 import countriesData from "../../../assets/countries.json";
 import categoriesData from "../../../assets/categoies.json";
 
 import styles from "./Options.module.css";
 
-import { Country, Category, Article } from "../../../types/types";
+import { Country, Category } from "../../../types/types";
 
 type Props = {
   confirmedOptions: (country: Country, category: Category) => void;
 };
 
 function Options({ confirmedOptions }: Props) {
-  const [selectedCountry, setSelectedCountry] = useState<Country | null>(null);
-  const [selectedCategory, setSelectedCategory] = useState<Category | null>(
-    null
-  );
+  const {
+    selectedCountry,
+    setSelectedCountry,
+    selectedCategory,
+    setSelectedCategory,
+  } = useNewsStore();
 
   const getFlagEmoji = (countryCode: string) => {
     const codePoints = countryCode
@@ -25,18 +28,11 @@ function Options({ confirmedOptions }: Props) {
     return String.fromCodePoint(...codePoints);
   };
 
-  const selectedCountryHandler = (countryCode: {
-    name: string;
-    "kor-name": string;
-    code: string;
-  }) => {
+  const selectedCountryHandler = (countryCode: Country) => {
     setSelectedCountry(countryCode);
   };
 
-  const selectedCategoryHandler = (category: {
-    name: string;
-    "kor-name": string;
-  }) => {
+  const selectedCategoryHandler = (category: Category) => {
     setSelectedCategory(category);
   };
 

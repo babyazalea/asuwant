@@ -21,7 +21,7 @@ function News({ isLoading, confirmedOptions, articles }: Props) {
     news = <Loading />;
   }
 
-  if (articles.length > 0) {
+  if (articles && articles.length > 0) {
     news = <Tiles articles={articles} />;
   }
 

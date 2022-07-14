@@ -1,6 +1,6 @@
-import React from "react";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
+import { useNewsStore } from "./store/newsStore";
 import axios from "axios";
 
 import Layout from "./components/UI/Layout";
@@ -15,9 +15,6 @@ import "./App.css";
 function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [errorCode, setErrorCode] = useState(null);
-  const [chosenCountry, setChosenCountry] = useState<Country | null>(null);
-  const [chosenCategory, setChosenCategory] = useState<Category | null>(null);
-  const [articles, setArticles] = useState<Article[]>([]);
 
   const navigate = useNavigate();
 
@@ -27,10 +24,16 @@ function App() {
     }
   }, [navigate, errorCode]);
 
-  const confirmedOptions = (country: Country, category: Category) => {
-    setChosenCountry(country);
-    setChosenCategory(category);
+  const {
+    selectedCountry,
+    setSelectedCountry,
+    selectedCategory,
+    setSelectedCategory,
+    articles,
+    setArticles,
+  } = useNewsStore();
 
+  const confirmedOptions = () => {
     // start loading
     setIsLoading(true);
 
@@ -38,8 +41,8 @@ function App() {
 
     const params = {
       params: {
-        countryCode: country.code,
-        categoryName: category.name,
+        countryCode: selectedCountry?.code,
+        categoryName: selectedCategory?.name,
       },
     };
 
@@ -63,8 +66,8 @@ function App() {
   const resetApp = () => {
     setIsLoading(false);
     setErrorCode(null);
-    setChosenCountry(null);
-    setChosenCategory(null);
+    setSelectedCountry(null);
+    setSelectedCategory(null);
     setArticles([]);
   };
 
@@ -76,9 +79,9 @@ function App() {
           errorCode === null && (
             <News
               isLoading={isLoading}
-              chosenCountry={chosenCountry!}
-              chosenCategory={chosenCategory!}
-              articles={articles}
+              chosenCountry={selectedCountry!}
+              chosenCategory={selectedCategory!}
+              articles={articles!}
               confirmedOptions={confirmedOptions}
             />
           )
@@ -100,8 +103,8 @@ function App() {
       <Layout
         isError={errorCode !== null}
         isLoading={isLoading}
-        chosenCountry={chosenCountry!}
-        chosenCategory={chosenCategory!}
+        chosenCountry={selectedCountry!}
+        chosenCategory={selectedCategory!}
         resetApp={resetApp}
       >
         {routes}

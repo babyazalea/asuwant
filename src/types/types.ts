@@ -1,15 +1,15 @@
-export type Country = {
+export interface Country {
   name: string;
   "kor-name": string;
   code: string;
-};
+}
 
-export type Category = {
+export interface Category {
   name: string;
   "kor-name": string;
-};
+}
 
-export type Article = {
+export interface Article {
   source: {
     id: string;
     name: string;
@@ -21,4 +21,4 @@ export type Article = {
   urlToImage: string;
   publishedAt: string;
   content: string;
-};
+}
