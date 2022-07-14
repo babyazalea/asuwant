@@ -7,8 +7,6 @@ export const fetchNews = (config: {
     categoryName: string;
   };
 }): Promise<Article[]> => {
-  console.log("fetching");
-
   const url = process.env.REACT_APP_BACKEND_URL;
 
   return axios.get(url!, config).then((res) => {
