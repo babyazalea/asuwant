@@ -1,3 +1,5 @@
+import React from "react";
+
 import expandingCircle from "../../assets/the_expanding_circle.png";
 
 import styles from "./Loading.module.css";
