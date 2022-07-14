@@ -7,8 +7,6 @@ interface NewsTypes {
   setSelectedCountry: (country: Country | null) => void;
   selectedCategory: Category | null;
   setSelectedCategory: (category: Category | null) => void;
-  articles: Article[] | null;
-  setArticles: (articles: Article[]) => void;
 }
 
 export const useNewsStore = create<NewsTypes>((set) => ({
@@ -20,12 +18,6 @@ export const useNewsStore = create<NewsTypes>((set) => ({
   setSelectedCategory: (category) => {
     set(() => ({
       selectedCategory: category,
-    }));
-  },
-  articles: null,
-  setArticles: (articles) => {
-    set(() => ({
-      articles,
     }));
   },
 }));

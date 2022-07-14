@@ -6,12 +6,14 @@ import styles from "./Loading.module.css";
 
 function Loading() {
   return (
-    <div className={styles.loading}>
-      <img
-        src={expandingCircle}
-        className={styles["expanding-circle"]}
-        alt="확장하는 원"
-      />
+    <div className={styles["loading-wrapper"]}>
+      <div className={styles.loading}>
+        <img
+          src={expandingCircle}
+          className={styles["expanding-circle"]}
+          alt="확장하는 원"
+        />
+      </div>
     </div>
   );
 }

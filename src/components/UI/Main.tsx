@@ -22,6 +22,14 @@ function Main({ isLoading, isError, children }: Props) {
     mainClassName = `${styles.main} ${styles.options}`;
   }
 
+  if (isLoading) {
+    mainClassName = `${styles.main} ${styles.loading}`;
+  }
+
+  if (!isLoading && isError) {
+    mainClassName = `${styles.main} ${styles.error}`;
+  }
+
   return <main className={mainClassName}>{children}</main>;
 }
 
