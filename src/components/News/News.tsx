@@ -1,18 +1,18 @@
 import React from "react";
-import { useNewsStore } from "../../store/newsStore";
 
 import Loading from "../UI/Loading";
 import Tiles from "./Tiles/Tiles";
 import Options from "./Options/Options";
 
+import { Article } from "../../types/types";
+
 type Props = {
   isLoading: boolean;
   confirmedOptions: () => void;
+  articles: Article[];
 };
 
-function News({ isLoading, confirmedOptions }: Props) {
-  const { articles } = useNewsStore();
-
+function News({ isLoading, confirmedOptions, articles }: Props) {
   let news = <Options confirmedOptions={confirmedOptions} />;
 
   if (isLoading) {
