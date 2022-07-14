@@ -1,5 +1,4 @@
-import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import React from "react";
 import Tile from "./Tile/Tile";
 
 import styles from "./Tiles.module.css";

@@ -1,6 +1,6 @@
 import create from "zustand";
 
-import { Country, Category, Article } from "../types/types";
+import { Country, Category } from "../types/types";
 
 interface NewsTypes {
   selectedCountry: Country | null;

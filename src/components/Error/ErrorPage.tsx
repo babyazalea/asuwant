@@ -22,7 +22,7 @@ function ErrorPage({ error, resetApp }: Props) {
     }
 
     navigate("/");
-  }, [navigate, errorCode]);
+  }, [navigate, error]);
 
   const errorMessage =
     errorCode === "rateLimited" ? (
