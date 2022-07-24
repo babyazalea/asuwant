@@ -5,12 +5,12 @@ import { fetchNews } from "./api/newsApi";
 import { useQuery } from "react-query";
 
 import Layout from "./components/UI/Layout";
+import Loading from "./components/UI/Loading";
 import News from "./components/News/News";
 import ErrorPage from "./components/Error/ErrorPage";
 
-import "./App.css";
 import { Article } from "./types/types";
-import Loading from "./components/UI/Loading";
+import "./App.css";
 
 function App() {
   const navigate = useNavigate();
@@ -53,31 +53,6 @@ function App() {
     setSelectedCategory(null);
     remove();
   };
-
-  // const routes = (
-  //   <Routes>
-  //     <Route
-  //       path="/"
-  //       element={
-  //         !isError && (
-  //           <News
-  //             isLoading={isLoading && isFetching}
-  //             confirmedOptions={confirmedOptions}
-  //             articles={data!}
-  //           />
-  //         )
-  //       }
-  //     />
-  //     <Route path="/credits" element={<Credits />} />
-  //     {isError && (
-  //       <Route
-  //         path="/error"
-  //         element={<ErrorPage error={error?.message} resetApp={resetApp} />}
-  //       />
-  //     )}
-  //     <Route path="*" element={<Navigate to="/" />} />
-  //   </Routes>
-  // );
 
   return (
     <div className="App">
