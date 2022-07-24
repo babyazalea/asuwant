@@ -1,20 +1,16 @@
 import React, { Fragment } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useNewsStore } from "../../store/newsStore";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faRedo,
-  faQuestionCircle,
-  faSpinner,
-} from "@fortawesome/free-solid-svg-icons";
+import { faRedo, faSpinner } from "@fortawesome/free-solid-svg-icons";
 
 import styles from "./Header.module.css";
 
 type Props = {
   isError: boolean;
   isLoading: boolean;
-  resetApp: () => void;
+  resetApp: null | (() => void);
 };
 
 function Header({ isError, isLoading, resetApp }: Props) {
@@ -55,7 +51,10 @@ function Header({ isError, isLoading, resetApp }: Props) {
           </span>
         </div>
         {!isLoading && (
-          <button className={styles["reset-button"]} onClick={() => resetApp()}>
+          <button
+            className={styles["reset-button"]}
+            onClick={() => resetApp!()}
+          >
             <FontAwesomeIcon icon={faRedo} />
             <span className={styles["reset-button-text"]}>
               국가 & 카테고리 재설정
@@ -66,6 +65,15 @@ function Header({ isError, isLoading, resetApp }: Props) {
     );
   }
 
+  const navigate = useNavigate();
+
+  const creditsClickHandler = () => {
+    if (resetApp !== null) {
+      resetApp();
+    }
+    navigate("/credits", { replace: true });
+  };
+
   return (
     <header className={styles.header}>
       <nav className={styles.nav}>
@@ -73,13 +81,8 @@ function Header({ isError, isLoading, resetApp }: Props) {
           <div className={styles.logo}>
             <Link to="/">asuwant</Link>
           </div>
-          <div className={styles.credits}>
-            <Link to="/credits">
-              <span className={styles["credits-text-lg"]}>credits</span>
-              <span className={styles["credits-text-sm"]}>
-                <FontAwesomeIcon icon={faQuestionCircle} />
-              </span>
-            </Link>
+          <div className={styles.credits} onClick={creditsClickHandler}>
+            <span className={styles["credits-text-lg"]}>credits</span>
           </div>
         </div>
         {!isError && navRight}

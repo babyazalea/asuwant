@@ -1,16 +1,16 @@
 import React, { useEffect } from "react";
-import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useNewsStore } from "./store/newsStore";
 import { fetchNews } from "./api/newsApi";
 import { useQuery } from "react-query";
 
 import Layout from "./components/UI/Layout";
 import News from "./components/News/News";
-import Credits from "./components/Credits/Credits";
 import ErrorPage from "./components/Error/ErrorPage";
 
 import "./App.css";
 import { Article } from "./types/types";
+import Loading from "./components/UI/Loading";
 
 function App() {
   const navigate = useNavigate();
@@ -54,39 +54,46 @@ function App() {
     remove();
   };
 
-  const routes = (
-    <Routes>
-      <Route
-        path="/"
-        element={
-          !isError && (
-            <News
-              isLoading={isLoading && isFetching}
-              confirmedOptions={confirmedOptions}
-              articles={data!}
-            />
-          )
-        }
-      />
-      <Route path="/credits" element={<Credits />} />
-      {isError && (
-        <Route
-          path="/error"
-          element={<ErrorPage error={error?.message} resetApp={resetApp} />}
-        />
-      )}
-      <Route path="*" element={<Navigate to="/" />} />
-    </Routes>
-  );
+  // const routes = (
+  //   <Routes>
+  //     <Route
+  //       path="/"
+  //       element={
+  //         !isError && (
+  //           <News
+  //             isLoading={isLoading && isFetching}
+  //             confirmedOptions={confirmedOptions}
+  //             articles={data!}
+  //           />
+  //         )
+  //       }
+  //     />
+  //     <Route path="/credits" element={<Credits />} />
+  //     {isError && (
+  //       <Route
+  //         path="/error"
+  //         element={<ErrorPage error={error?.message} resetApp={resetApp} />}
+  //       />
+  //     )}
+  //     <Route path="*" element={<Navigate to="/" />} />
+  //   </Routes>
+  // );
 
   return (
     <div className="App">
       <Layout
         isError={isError}
         isLoading={isLoading && isFetching}
+        isCredits={false}
         resetApp={resetApp}
       >
-        {routes}
+        {isLoading && isFetching && <Loading />}
+        {!isFetching && !isError && (
+          <News confirmedOptions={confirmedOptions} articles={data!} />
+        )}
+        {!isLoading && isError && (
+          <ErrorPage error={error?.message} resetApp={resetApp} />
+        )}
       </Layout>
     </div>
   );

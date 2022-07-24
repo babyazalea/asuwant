@@ -6,10 +6,11 @@ import { useNewsStore } from "../../store/newsStore";
 type Props = {
   isError: boolean;
   isLoading: boolean;
+  isCredits: boolean;
   children: ReactNode;
 };
 
-function Main({ isLoading, isError, children }: Props) {
+function Main({ isLoading, isError, isCredits, children }: Props) {
   const { selectedCountry, selectedCategory } = useNewsStore();
 
   let mainClassName = styles.main;
@@ -28,6 +29,10 @@ function Main({ isLoading, isError, children }: Props) {
 
   if (!isLoading && isError) {
     mainClassName = `${styles.main} ${styles.error}`;
+  }
+
+  if (isCredits) {
+    mainClassName = `${styles.main} ${styles.credits}`;
   }
 
   return <main className={mainClassName}>{children}</main>;

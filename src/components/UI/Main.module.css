@@ -30,6 +30,10 @@
   overflow: hidden;
 }
 
+.credits {
+  width: auto;
+}
+
 @media (max-width: 768px) {
   .news {
     width: 85%;
