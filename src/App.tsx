@@ -1,5 +1,4 @@
-import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import React from "react";
 import { useNewsStore } from "./store/newsStore";
 import { fetchNews } from "./api/newsApi";
 import { useQuery } from "react-query";
@@ -13,8 +12,6 @@ import { Article } from "./types/types";
 import "./App.css";
 
 function App() {
-  const navigate = useNavigate();
-
   const {
     selectedCountry,
     setSelectedCountry,
@@ -25,7 +22,7 @@ function App() {
   const { data, isLoading, isFetching, isError, error, refetch, remove } =
     useQuery<Article[], Error>(
       ["news"],
-      () => {
+      async () => {
         const config = {
           params: {
             countryCode: selectedCountry!.code,
@@ -33,16 +30,21 @@ function App() {
           },
         };
 
-        return fetchNews(config!);
+        try {
+          const res = await fetchNews(config);
+          const data = await res.data;
+
+          return data.articles;
+        } catch (err: any) {
+          const errRes = await err.response;
+
+          const errData = await errRes.data;
+
+          throw new Error(errData.code);
+        }
       },
       { enabled: false }
     );
-
-  useEffect(() => {
-    if (error) {
-      navigate("/error");
-    }
-  }, [navigate, error]);
 
   const confirmedOptions = () => {
     refetch();

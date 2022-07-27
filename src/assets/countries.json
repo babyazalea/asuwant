@@ -26,11 +26,6 @@
       "code": "nl"
     },
     {
-      "name": "Russia",
-      "kor-name": "러시아",
-      "code": "ru"
-    },
-    {
       "name": "New Zealand",
       "kor-name": "뉴질랜드",
       "code": "nz"
@@ -64,6 +59,11 @@
       "name": "Romania",
       "kor-name": "루마니아",
       "code": "ro"
+    },
+    {
+      "name": "Russia",
+      "kor-name": "러시아",
+      "code": "ru"
     },
     {
       "name": "Malaysia",

@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosPromise } from "axios";
 import { Article } from "../types/types";
 
 export const fetchNews = (config: {
@@ -6,10 +6,8 @@ export const fetchNews = (config: {
     countryCode: string;
     categoryName: string;
   };
-}): Promise<Article[]> => {
-  const url = process.env.REACT_APP_BACKEND_URL;
+}): Promise<AxiosPromise> => {
+  const url = `https://newsapi.org/v2/top-headlines?country=${config.params.countryCode}&category=${config.params.categoryName}&apiKey=${process.env.REACT_APP_NEWS_API_KEY}`;
 
-  return axios.get(url!, config).then((res) => {
-    return res.data.articles;
-  });
+  return axios.get(url!, config);
 };
