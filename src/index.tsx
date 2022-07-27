@@ -13,7 +13,7 @@ const queryClient = new QueryClient();
 ReactDOM.render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
-      <Router>
+      <Router basename="/asuwant-frontend">
         <Routes>
           <Route path="/" element={<App />} />
           <Route path="/credits" element={<Credits />} />
